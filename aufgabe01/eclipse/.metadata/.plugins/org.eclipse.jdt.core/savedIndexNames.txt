@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+/home/agribu/doc/studium/module/vmc/praktikum/aufgabe01/eclipse/.metadata/.plugins/org.eclipse.jdt.core
+1757161772.index
+3507159782.index
+2568822233.index

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">VMC Network Monitor</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+     <string name="monitor_title">Network Monitor</string>
+    <string name="info_app_name">VMC Network Monitor</string>
+    <string name="tools_app_name">VMC Speedtest</string>
+    
+    <string name="results_app_name">Test Results</string>
+    <string name="info_title">Network Information</string>
+    <string name="no_data_net"><b>No Data Network Available</b></string>
+    <string name="connected">Connected</string>
+    <string name="nettools_connected">Connected</string>
+    <string name="not_connected">Disconnected</string>
+    <string name="net_connectivity_changed">Network Connectivity Changed</string>
+    <string name="more_info">More Information..</string>
+    <string name="preferences_file">netmonitor_preferences</string>
+    <string name="date_format_ISO8601">yyyy-MM-dd\'T\'HH:mm:ss.SSS</string>
+    <string name="bad_gateway">Invalid gateway address</string>
+    <string name="bad_dns">Invalid DNS Server address</string>
+    <string name="about_network_monitor_title">About Android Network Monitor</string>
+    <string name="about_network_monitor_menu_title">About</string>
+    <string name="first_run_title">VMC Network Monitor</string>
+    
+    <!--  Network types -->
+    <string name="net_type_mobile">Mobile</string>
+    <string name="net_type_wifi">WiFi</string>
+    <string name="net_type_unsupported">Unsupported</string>
+    <string name="roaming_yes">true</string>
+    <string name="roaming_no">false</string>
+    
+    <!-- Lables to use to display network information -->
+    <string name="key_date_name">Date</string>
+    <string name="key_time_name">Time</string>
+    <string name="key_state_name">Network State</string>
+    <string name="key_interface_name">Network Interface</string>
+    <string name="key_type_name">Network Type</string>
+    <string name="key_netid_name">Network ID</string>
+    <string name="key_signalstrength_name">GSM Signalstrength</string>    
+    <string name="key_ip_name">IP Address</string>
+    <string name="key_gateway_name">Gateway</string>
+    <string name="key_speed_name">Network Speed</string>
+    <string name="key_dns_name">DNS</string>    
+    <string name="key_nat_ip_name">External NAT IP</string>
+    <string name="permitted">allow</string>
+    <string name="denied">deny</string>
+    <string name="key_cell_type_name">Connection Type</string>
+    <string name="key_cell_location_name">Cell Location</string>  
+     <string name="key_cell_id_name">Cell ID</string>  
+    <string name="key_phone_type_name">Phone Radio</string>
+    
+    
+    <!-- Preference strings -->
+    <string name="preference_category_notify">Notification Options</string>
+    <string name="preference_category_tools">Network Tools Options</string>
+    <string name="preference_category_other">Other Options</string>
+    
+    <string name="preference_monitor_title">Network Monitoring</string>
+    <string name="preference_monitor_default">true</string>
+    <string name="preference_monitor_summary">Show notifications when connectivity changes</string>    
+         
+    <string name="preference_first_run_title">First Run</string>
+    <string name="preference_first_run_default">false</string>
+    <string name="preference_first_run_summary">Change this to see the opening screen again</string>
+
+    <string name="preference_ping_host_title">Host to ping</string>
+    <string name="preference_ping_host_default">google.com</string>
+    <string name="preference_ping_host_summary">Hostname to use as a "ping" target</string>
+    
+    <string name="preference_ping_host_port_title">Port to ping</string>
+    <string name="preference_ping_host_port_default">80</string>
+    <string name="preference_ping_host_port_summary">Port on the host to "ping" (only TCP ping available)</string>
+    		        
+    <string-array name="preference_monitor_type_options">
+        <item>Notify using the Status Bar</item>
+        <item>Notify using Toast</item>              
+    </string-array>
+
+    <!-- Notification preference values -->
+    <string-array name="preference_monitor_type_values">
+        <item>Status Bar</item>
+        <item>Toast</item>         
+    </string-array>
+    
+
+    <string name="tools_menu_lable">Network Tools</string>
+    <string name="preferences_menu_lable">Options</string>
+    
+  
+    <string name="monitoring_turned_off">Monitoring disabled</string>
+    <string name="monitoring_using">Monitoring uses</string>
+    <string name="cancel_lable">Cancel</string>  
+    
+    <!-- Tools lables -->
+    <string name="ping_google_list_string">Ping Host</string>
+    <string name="ping_dns_list_string">Ping DNS Server</string>
+    <string name="ping_gateway_list_string">Ping Gateway</string>
+    <string name="tools_ping_progress_dialog_text">Pinging..</string>
+    <string name="tools_other_progress_dialog_text">Loading..</string>
+    <string name="netstat_list_string">Netstat</string>    
+    <string name="getprop_list_string">System Properties</string>
+    <string name="netcfg_list_string">Interfaces</string>
+    <string name="services_list_string">Services</string>
+    <string name="disk_free_list_string">Disk Usage</string>
+    <string name="nat_ip_list_string">Show NAT IP</string>
+  
+    <string name="pro_version">true</string>
+    <string name="not_pro_version_string"><b><em>Sorry, these tools are only available in the pro version</em></b></string>
+    
+    <!--  About text -->
+    <string name="about_text">
+    </string>
+    <string name="first_run">
+    </string> 
+    <color name="white">#fff</color>
+    <color name="blue">#00f</color>
+    <string name="speedtest">Starte Speedtest</string>
+      <string name="getlocationgps">Starte GPS - Ortung</string>
+      <string name="getlocationcell">Starte Cell - Ortung</string>
+    
+    <string name="update_speed">%s kbit/sec</string>
+    <string name="update_downloaded">Downloaded %s </string>
+    <string name="update_downloaded_two"> of %s </string>
+   
+    <string name="update_connectionspeed">Connection time %s ms</string>
+  
+    <string name="update_downloaded_complete">Downloaded %s @</string>
+    <string name="update_downloaded_complete_two">%s kbit/sec</string>
+    <string name="txtview_speed">Geschwindigkeit: </string>
+    <string name="txtview_gps">  Messkoordinaten:</string>
+    <string name="button_upload">Upload der Daten</string>
+
+</resources>

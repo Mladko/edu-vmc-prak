@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+  
+    <PreferenceCategory
+    		android:title="@string/preference_category_tools" >   
+    		        
+    <EditTextPreference
+    		android:key="preference_ping_host"
+    		android:title="@string/preference_ping_host_title"
+    		android:defaultValue="@string/preference_ping_host_default"
+    		android:summary="@string/preference_ping_host_summary" />    		
+
+    <EditTextPreference
+    		android:key="preference_ping_host_port"
+    		android:title="@string/preference_ping_host_port_title"
+    		android:defaultValue="@string/preference_ping_host_port_default"
+    		android:summary="@string/preference_ping_host_port_summary" />
+    		
+    </PreferenceCategory>        
+    <PreferenceCategory
+    		android:title="@string/preference_category_other" >   
+    		
+    <CheckBoxPreference
+            android:key="preference_first_run"
+            android:title="@string/preference_first_run_title"
+            android:defaultValue="@string/preference_first_run_default"             
+            android:summary="@string/preference_first_run_summary"/>
+    
+    </PreferenceCategory>   
+</PreferenceScreen>

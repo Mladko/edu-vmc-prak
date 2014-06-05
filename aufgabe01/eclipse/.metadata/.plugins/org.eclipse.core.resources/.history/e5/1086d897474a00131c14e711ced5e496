@@ -1,0 +1,215 @@
+package whs.vmc.prak1;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Date;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.vmc1.R;
+
+public class SpeedtestActivity extends Activity {
+
+	// 100 MS
+	private final static int UPDATE_THRESHOLD = 100;
+	private static final String SERVER_PATH = "http://speedtest.qsc.de/1MB.qsc";
+	private SpeedTestHandler speedTestHandler;
+	private DownloadThread downloadThread;
+
+	// Messwerte
+	private ArrayList<Double> downloadedPerPackage;
+	private ArrayList<Long> timeForPackage;
+	private long connectionTime = 0;
+	private long currentFileSize = 0;
+	private long ping = 0;
+	private long fileSize;
+
+	// Ergebnis
+	public static double ergebnis = 0.0;
+
+	private Button mBtnStart;
+	private TextView mTxtSpeed;
+	private TextView mTxtConnectionSpeed;
+	private TextView mTxtProgress;
+	private TextView resultTextView;
+	private DecimalFormat dF;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		dF = new DecimalFormat("##.##");
+		requestWindowFeature(Window.FEATURE_PROGRESS);
+		setContentView(R.layout.speedtest);
+		resultTextView = (TextView) findViewById(R.id.text1);
+		resultTextView.setTextSize(9);
+		bindListeners();
+		ergebnis = 0.0;
+
+	}
+
+	private void bindListeners() {
+		mBtnStart = (Button) findViewById(R.id.btnStart);
+		mTxtSpeed = (TextView) findViewById(R.id.speed);
+		mTxtConnectionSpeed = (TextView) findViewById(R.id.connectionspeeed);
+		mTxtProgress = (TextView) findViewById(R.id.progress);
+
+		mBtnStart.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(final View view) {
+				setProgressBarVisibility(true);
+				mTxtSpeed.setText("Test started");
+				mBtnStart.setEnabled(false);
+				speedTestHandler = new SpeedTestHandler();
+				downloadThread = new DownloadThread();
+				downloadThread.start();
+				// new Thread(speedtesterRun).start();
+			}
+		});
+	}
+
+	public Long getOverallSpeed() {
+		return ((fileSize / getOverallTime()) * 1000) / 1000;
+	}
+
+	public Long getOverallTime() {
+		return (getCurrentDuration() + connectionTime);
+	}
+
+	public Long getCurrentDuration() {
+
+		Long duration = 0L;
+
+		for (Long d : timeForPackage) {
+			duration += d;
+		}
+
+		return duration;
+
+	}
+
+	
+	public Double getSpeed(int pos) {
+
+		return ((downloadedPerPackage.get(pos) / timeForPackage.get(pos)) * 1000) / 1000;
+	}
+
+	public Double getMinSpeed() {
+
+		Double minSpeed = getSpeed(0);
+
+		for (int i = 0; i < downloadedPerPackage.size(); i++) {
+			if (minSpeed > getSpeed(i)) {
+				minSpeed = getSpeed(i);
+			}
+		}
+
+		return minSpeed;
+	}
+
+	public Double getMaxSpeed() {
+
+		Double maxSpeed = getSpeed(0);
+
+		for (int i = 0; i < downloadedPerPackage.size(); i++) {
+			if (maxSpeed < getSpeed(i)) {
+				maxSpeed = getSpeed(i);
+			}
+		}
+
+		return maxSpeed;
+	}
+
+	public Double getAvgSpeed() {
+
+		Double sumSpeed = 0.0;
+		Double avgSpeed = 0.0;
+
+		for (int i = 0; i < downloadedPerPackage.size(); i++) {
+			sumSpeed += getSpeed(i);
+		}
+		avgSpeed = sumSpeed / downloadedPerPackage.size();
+
+		return avgSpeed;
+	}
+
+	class SpeedTestHandler extends Handler {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+
+			double prozent = currentFileSize * 100.0 / fileSize;
+
+			// 98% Da es oefter zu Ungenauigkeiten kommen kann.
+			if (prozent >= (double) 98) {
+
+				setInformationTextView();
+
+				NetworkInformations.speed_old = false;
+				SpeedtestActivity.ergebnis = getAvgSpeed();
+
+			}
+			mTxtConnectionSpeed.setText(0 + currentFileSize + " Byte von "
+					+ fileSize + " downloaded");
+
+			mTxtSpeed.setText("Geschwindigkeit: "
+					+ dF.format(getSpeed(downloadedPerPackage.size() - 1))
+					+ " kB/s");
+
+			setProgress((int) (prozent + 0));
+
+			mTxtProgress.setText("Dauer: " + getCurrentDuration() + " ms ");
+
+		}
+
+		private void setInformationTextView() {
+			String result = "";
+			// TODO: Aufgabe 2: Implementieren sie die Ausgabe.
+			result = "Bitte setInformationTextView in der Klasse SpeedtestActivity implementieren";
+			resultTextView.setText(result);
+		}
+	}
+
+	/**
+	 * Aufgabe 2 Implementieren Sie sinngemaess der 
+	 * Aufgabenstellung den DownloadThread.
+	 */
+	public class DownloadThread extends Thread {
+		HttpURLConnection con = null;
+		URL url = null;
+		InputStream stream;
+
+		@Override
+		public void run() {
+			super.run();
+			
+			try {
+				url = new URL(SERVER_PATH);
+				con = (HttpURLConnection) url.openConnection();
+				stream = con.getInputStream();
+				
+				Date currentDate = new Date(System.currentTimeMillis());
+				long currentTime = System.currentTimeMillis();
+				
+				super.fileSize = con.getContentLength();
+				
+			} catch (IOException e) {
+				con.disconnect();
+				e.printStackTrace();
+			}
+
+		}
+	}
+}
